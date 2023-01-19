@@ -1,5 +1,6 @@
 import React from "react";
 import "../App.css";
+import OrderHolder from "./OrderHolder";
 
 const InitialOrders = [
   {
@@ -28,23 +29,20 @@ const InitialOrders = [
   },
 ];
 
-function OrderList() {
+function OrderList(props) {
+  const gotAmountFromChild = (enteredAmount) => {
+    props.gotAmountFromList(enteredAmount);
+  };
   return (
     <div className="list-of-orders">
       {InitialOrders.map((order) => (
-        <div className="order-holder" key={order.id}>
-          <div className="order">
-            <h1 className="order-name">{order.name}</h1>
-            <p className="order-description">{order.description}</p>
-            <p className="order-price">${order.price}</p>
-          </div>
-          <div className="add-order">
-            <p className="order-amount">
-              Amount: <span> 1</span>
-            </p>
-            <button className="add-order-button">+ Add</button>
-          </div>
-        </div>
+        <OrderHolder
+          onGetAmount={gotAmountFromChild}
+          key={order.id}
+          name={order.name}
+          description={order.description}
+          price={order.price}
+        />
       ))}
     </div>
   );
