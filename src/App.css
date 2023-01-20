@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 .App {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   padding: 0 auto;
@@ -29,6 +30,8 @@
   background-color: rgb(94, 25, 25);
   opacity: 0.8;
   outline: none;
+  display: flex;
+  align-items: center;
 }
 .header-button:hover {
   opacity: 1;
@@ -75,24 +78,111 @@
   padding: 20px;
   border-bottom: 4px solid rgb(94, 25, 25);
 }
+.order-holder input {
+  font-size: 20px;
+  width: 40px;
+  margin-left: 10px;
+  height: 20px;
+}
 
 .add-order {
-  width: 100px;
+  width: 120px;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
 }
 
 .add-order-button {
+  width: 100%;
   color: #fff;
   font-size: 17px;
   font-weight: bold;
   border: 0;
   background-color: rgb(94, 25, 25);
-  padding: 5px 20px;
   border-radius: 20px;
   opacity: 0.8;
 }
 .add-order-button:hover {
   opacity: 1;
+}
+
+/* body of cart */
+.body-for-cart::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  color: #eee;
+  opacity: 0.7;
+  width: 100%;
+}
+
+.cart {
+  margin-top: 100px;
+  padding: 0 30px 30px;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%) scale(0.9);
+  width: 600px;
+  border-radius: 15px;
+  background-color: rgb(236, 232, 232);
+  z-index: 1;
+  position: absolute;
+  box-shadow: 1px 4px 24px 0px rgba(66, 68, 90, 1);
+}
+
+.ordered-meals {
+  padding-bottom: 10px;
+  margin-top: 30px;
+  border-bottom: 4px solid brown;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.ordered-meal-info {
+  width: 160px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.ordered-meal {
+  font-size: 40px;
+}
+.ordered-meal-price {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 20px 0 0;
+}
+.ordered-amount {
+  border: 2px solid #111;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 0 0 0 10px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.button-container {
+  width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button-container button {
+  color: brown;
+  font-size: 30px;
+  font-weight: bold;
+  border: 2px solid brown;
+  border-radius: 10px;
+  padding: 1px 20px;
+  outline: none;
+  cursor: pointer;
+}
+
+.button-container button:hover {
+  transition: 1s;
+  background-color: brown;
+  color: #fff;
 }
