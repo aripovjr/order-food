@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
+import CartContext from "../store/cart-context";
 import ShowCart from "./ShowCart";
 
 function Header(props) {
@@ -10,19 +11,24 @@ function Header(props) {
     setClickButton(true);
   };
 
+  const closeCart = () => {
+    setClickButton(false);
+  };
+
+  const cartCtx = useContext(CartContext);
+  const numberOfCartItems = cartCtx.items.reduce((currentNumber, item) => {
+    return currentNumber + item.amount;
+  }, 0);
+  console.log(numberOfCartItems);
   return (
     <>
-      {clickButton && <ShowCart />}
+      {clickButton && <ShowCart onConfirm={closeCart} />}
       <div className="navigation">
         <h1>React Meals</h1>
         <button onClick={showCart} className="header-button">
           <FaShoppingCart style={{ marginRight: "10px" }} />
           Your Cart
-          {amount === "" ? (
-            <span className="amount-in-header">0</span>
-          ) : (
-            <span className="amount-in-header">{(amount = amount + 0)}</span>
-          )}
+          <span className="amount-in-header">{numberOfCartItems}</span>
         </button>
       </div>
     </>

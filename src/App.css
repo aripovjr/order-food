@@ -129,6 +129,8 @@
   z-index: 1;
   position: absolute;
   box-shadow: 1px 4px 24px 0px rgba(66, 68, 90, 1);
+  display: flex;
+  flex-direction: column;
 }
 
 .ordered-meals {
@@ -183,6 +185,25 @@
 
 .button-container button:hover {
   transition: 1s;
+  background-color: brown;
+  color: #fff;
+}
+
+.button-container-in-cart {
+  margin: 20px 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  width: 170px;
+}
+.button-container-in-cart button {
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 20px;
+  border: 2px solid brown;
+  color: brown;
+  cursor: pointer;
+}
+.button-container-in-cart button:nth-child(2) {
   background-color: brown;
   color: #fff;
 }

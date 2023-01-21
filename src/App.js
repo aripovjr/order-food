@@ -3,6 +3,7 @@ import Header from "./component/Header";
 import OrderList from "./component/OrderList";
 import IntroDescription from "./component/IntroDescription";
 import { useState } from "react";
+import CartProvider from "./store/CartProvider";
 
 const InitialOrders = [
   {
@@ -38,11 +39,16 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Header Orders={InitialOrders} amount={addAmount} />
-      <IntroDescription />
-      <OrderList Orders={InitialOrders} gotAmountFromList={amountFromHolder} />
-    </div>
+    <CartProvider>
+      <div className="App">
+        <Header Orders={InitialOrders} amount={addAmount} />
+        <IntroDescription />
+        <OrderList
+          Orders={InitialOrders}
+          gotAmountFromList={amountFromHolder}
+        />
+      </div>
+    </CartProvider>
   );
 }
 

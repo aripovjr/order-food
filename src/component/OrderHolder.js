@@ -10,6 +10,9 @@ function OrderHolder(props) {
   const addAmount = () => {
     props.onGetAmount(amountValue);
   };
+  const submitHandler = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <div className="order-holder">
@@ -18,13 +21,13 @@ function OrderHolder(props) {
         <p className="order-description">{props.description}</p>
         <p className="order-price">${props.price}</p>
       </div>
-      <div className="add-order">
+      <form onSubmit={submitHandler} className="add-order">
         <label className="order-amount">Amount:</label>
         <input onChange={takeAmountValue} value={amountValue} type="number" />
         <button onClick={addAmount} className="add-order-button">
           + Add
         </button>
-      </div>
+      </form>
     </div>
   );
 }
