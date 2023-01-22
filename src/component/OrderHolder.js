@@ -1,34 +1,43 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import Input from "./Input";
 
 function OrderHolder(props) {
-  const [amountValue, setAmountValue] = useState(0);
+  const [amountIsValid, setAmountIsValid] = useState(true);
+  const amountInputRef = useRef();
 
-  const takeAmountValue = (e) => {
-    setAmountValue(e.target.value);
-  };
-
-  const addAmount = () => {
-    props.onGetAmount(amountValue);
-  };
   const submitHandler = (e) => {
     e.preventDefault();
+    const enteredAmount = amountInputRef.current.value;
+    const enteredAmountNumber = +enteredAmount;
+
+    if (
+      enteredAmount.trim().length === 0 ||
+      enteredAmountNumber < 1 ||
+      enteredAmountNumber > 5
+    ) {
+      setAmountIsValid(false);
+      return;
+    }
+    props.onAddToCart(enteredAmountNumber);
   };
 
   return (
-    <div className="order-holder">
-      <div className="order">
-        <h1 className="order-name">{props.name}</h1>
-        <p className="order-description">{props.description}</p>
-        <p className="order-price">${props.price}</p>
-      </div>
-      <form onSubmit={submitHandler} className="add-order">
-        <label className="order-amount">Amount:</label>
-        <input onChange={takeAmountValue} value={amountValue} type="number" />
-        <button onClick={addAmount} className="add-order-button">
-          + Add
-        </button>
-      </form>
-    </div>
+    <form onSubmit={submitHandler} className="add-order">
+      <Input
+        ref={amountInputRef}
+        label="Amount"
+        input={{
+          id: "amount",
+          type: "number",
+          min: "1",
+          max: "5",
+          step: "1",
+          defaultValue: "1",
+        }}
+      />
+      <button className="add-order-button">+ Add</button>
+      {!amountIsValid && <p>Please enter a valid amount (1-5)</p>}
+    </form>
   );
 }
 

@@ -1,11 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import CartContext from "../store/cart-context";
 import ShowCart from "./ShowCart";
 
 function Header(props) {
   const [clickButton, setClickButton] = useState(false);
-  var { amount } = props;
+  const [btnIsHighlighted, setBtnIsHighlighted] = useState(false);
+  const cartCtx = useContext(CartContext);
+
+  const { items } = cartCtx;
 
   const showCart = () => {
     setClickButton(true);
@@ -15,11 +18,25 @@ function Header(props) {
     setClickButton(false);
   };
 
-  const cartCtx = useContext(CartContext);
   const numberOfCartItems = cartCtx.items.reduce((currentNumber, item) => {
     return currentNumber + item.amount;
   }, 0);
-  console.log(numberOfCartItems);
+
+  useEffect(() => {
+    if (items.length === 0) {
+      return;
+    }
+    setBtnIsHighlighted(true);
+
+    const timer = setTimeout(() => {
+      setBtnIsHighlighted(false);
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [items]);
+
   return (
     <>
       {clickButton && <ShowCart onConfirm={closeCart} />}

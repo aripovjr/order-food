@@ -33,20 +33,12 @@ const InitialOrders = [
 ];
 
 function App() {
-  const [addAmount, setAddAmount] = useState("");
-  const amountFromHolder = (enteredAmount) => {
-    setAddAmount(enteredAmount);
-  };
-
   return (
     <CartProvider>
       <div className="App">
-        <Header Orders={InitialOrders} amount={addAmount} />
+        <Header Orders={InitialOrders} />
         <IntroDescription />
-        <OrderList
-          Orders={InitialOrders}
-          gotAmountFromList={amountFromHolder}
-        />
+        <OrderList Orders={InitialOrders} />
       </div>
     </CartProvider>
   );
